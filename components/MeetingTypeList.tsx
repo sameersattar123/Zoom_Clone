@@ -2,13 +2,17 @@
 import React, { useState } from 'react'
 import HomeCard from './HomeCard';
 import { useRouter } from 'next/navigation';
+import MeetingModal from './MeetingModal';
 
 const MeetingTypeList = () => {
     const router = useRouter();
     const [meetingState, setMeetingState] = useState<  'isScheduleMeeting' | 'isJoiningMeeting' | 'isInstantMeeting' | undefined>(undefined)
 
+    const createMeeting = () => {
+      
+    }
     return (
-        <section className='grid grif-cols-1 gap-5 md:grid-cols-2  xl:grid-cols-4'>
+        <section className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4'>
           <HomeCard 
           img='/icons/add-meeting.svg'
           title='New Meeting'
@@ -36,6 +40,15 @@ const MeetingTypeList = () => {
            Description='Check out your Recordings'
            handleClick={() => router.push('/recordings')}
            className = 'bg-yellow-1'
+          />
+
+          <MeetingModal
+          isOpen={meetingState === 'isInstantMeeting'}
+          onClose={() => setMeetingState(undefined)}
+          buttonText='Start Meeting'
+          title='Start an Instant Meeting'
+          className='text-center'
+          handleClick={createMeeting}
           />
         </section>
     )
